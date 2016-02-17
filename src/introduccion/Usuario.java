@@ -43,7 +43,7 @@ public class Usuario {
 		return login.matches("[A-Za-z].*");
 	}
 	
-	public static String generarLogin(){
+	public static String generarLoginOPassword(){
 		final String FUENTE_CARACTERES = "aAbBcCdDeEfFgGhHiIjJkKlLm"
 				+ "MnNñÑoOpPqQrRsStTuUvVwWxXyYzZ0123456789>?()=@.:,;!"
 				+ "<&{}";
@@ -59,13 +59,14 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [login=" + login + ", password=" + password + "]";
+		return "Usuario [login=" + login + "]";
 	}
 	
 	public static void main(String[] args) {
 		//probamos el metodo generarUsuario
 		for (int i = 0; i < 20; i++) {
-			System.out.println(generarLogin());
+			String login = generarLoginOPassword();
+			System.out.println(generarLoginOPassword()+" es login valido: "+validarUsuario(login));
 		}
 	}
 	
