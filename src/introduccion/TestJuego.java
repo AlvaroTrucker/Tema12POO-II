@@ -32,12 +32,11 @@ public class TestJuego {
 			System.out.println("Inicialmente");
 			System.out.println(juego);
 			System.out.println("Eliminando un usuario");
-			//juego.eliminarUsuario();
+			juego.eliminarUsuario("anselmito");
+			System.out.println(juego);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Fichero inexistente");
 		}
-
 	}
-
 }
