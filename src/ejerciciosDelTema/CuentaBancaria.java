@@ -45,7 +45,7 @@ public class CuentaBancaria {
 		if(primerDigito == 11)
 			primerDigito = 0;
 		if(primerDigito == 10)
-			primerDigito = 11;
+			primerDigito = 1;
 		
 		int resto2 = suma2 % 11;
 		int segundoDigito = 11-resto2;
