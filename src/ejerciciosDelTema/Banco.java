@@ -14,32 +14,41 @@ public class Banco {
 		return cuentas.remove(c);
 	}
 	
-	public CuentaBancaria devolverCuentaMayorSaldo(){
-		CuentaBancaria c = null;
+	public List<CuentaBancaria> devolverCuentaMayorSaldo(){
+		List<CuentaBancaria> listaMayorSaldo = new ArrayList<CuentaBancaria>();
 		if(cuentas.size() > 0){
 			double saldoMayor = 0;
+			CuentaBancaria c = null;
 			for (CuentaBancaria cuentaBancaria : cuentas) {
 				if(cuentaBancaria.getSaldo() > saldoMayor){
 					c = cuentaBancaria;
 					saldoMayor = c.getSaldo();
 				}
 			}
-		}
-		return c;
-	}
-	
-	public CuentaBancaria devolverCuentaMenorSaldo(){
-		CuentaBancaria c = null;
-		if(cuentas.size() > 0){
-			double saldoMenor = Double.MAX_VALUE;
-			for (CuentaBancaria cuentaBancaria : cuentas) {
-				if(cuentaBancaria.getSaldo() < saldoMenor){
-					c = cuentaBancaria;
-					saldoMenor = c.getSaldo();
-				}
+			for (CuentaBancaria cuentaBancaria : listaMayorSaldo) {
+				if(c.getSaldo() == cuentaBancaria.getSaldo())
+					listaMayorSaldo.add(cuentaBancaria);
 			}
 		}
-		return c;
+		return listaMayorSaldo;
+	}
+	
+	public List<CuentaBancaria> devolverCuentaMenorSaldo(){
+		List<CuentaBancaria> listaMenorSaldo = new ArrayList<CuentaBancaria>();
+		if(cuentas.size() > 0){
+			double saldoMenor = cuentas.get(0).getSaldo();
+			CuentaBancaria c = null;
+			for (CuentaBancaria cuentaBancaria : cuentas) {
+				if(cuentaBancaria.getSaldo() <= saldoMenor){
+					saldoMenor = c.getSaldo();
+					listaMenorSaldo.clear(); //resetea la lista
+					listaMenorSaldo.add(c);
+				}
+				if(cuentaBancaria.getSaldo() <= saldoMenor)
+					listaMenorSaldo.add(cuentaBancaria);
+			}
+		}
+		return listaMenorSaldo;
 	}
 	
 	public List<CuentaBancaria> devolverListadoMorosos(){
@@ -50,4 +59,19 @@ public class Banco {
 		}
 		return listaMorosos;
 	}
+	
+	private double getSaldoMedio(){
+		double saldoMedio = 0;
+		for (CuentaBancaria cuentaBancaria : cuentas) {
+			saldoMedio += cuentaBancaria.getSaldo();
+		}
+		return saldoMedio/cuentas.size();
+	}
+
+	@Override
+	public String toString() {
+		return "Nº de cuentas: "+cuentas.size()+", saldo medio: "+getSaldoMedio();
+	}
+	
+	
 }
